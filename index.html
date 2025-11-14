@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Trane Chiller Cost Calculator</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      background: #f5f5f7;
+      color: #111827;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+    }
+    .wrapper {
+      width: 100%;
+      max-width: 460px;
+      padding: 16px;
+      box-sizing: border-box;
+    }
+    .card {
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 20px 18px 18px;
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.12);
+    }
+    h1 {
+      font-size: 1.3rem;
+      margin: 0 0 4px;
+      text-align: left;
+    }
+    .subtitle {
+      font-size: 0.82rem;
+      color: #6b7280;
+      margin-bottom: 14px;
+    }
+    label {
+      font-size: 0.85rem;
+      font-weight: 500;
+      display: block;
+      margin-bottom: 4px;
+    }
+    .label-he {
+      font-size: 0.78rem;
+      color: #6b7280;
+      direction: rtl;
+      text-align: right;
+    }
+    input[type="number"] {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 10px;
+      border: 1px solid #d1d5db;
+      font-size: 1rem;
+      box-sizing: border-box;
+      outline: none;
+      transition: border-color 0.15s, box-shadow 0.15s;
+      -moz-appearance: textfield;
+    }
+    input[type="number"]::-webkit-outer-spin-button,
+    input[type="number"]::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+    input[type="number"]:focus {
+      border-color: #2563eb;
+      box-shadow: 0 0 0 1px rgba(37, 99, 235, 0.3);
+    }
+    .field-group {
+      margin-bottom: 14px;
+    }
+    .output-box {
+      background: #f3f4f6;
+      border-radius: 12px;
+      padding: 10px 12px;
+      margin-top: 4px;
+      font-size: 0.98rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .output-label {
+      font-size: 0.86rem;
+      color: #4b5563;
+    }
+    .output-value {
+      font-weight: 600;
+      font-feature-settings: "lnum", "tnum";
+    }
+    .btn-row {
+      margin-top: 10px;
+      display: flex;
+      gap: 8px;
+      justify-content: flex-end;
+    }
+    button {
+      border-radius: 999px;
+      border: none;
+      padding: 8px 16px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: background 0.15s, transform 0.05s, box-shadow 0.15s;
+    }
+    .btn-primary {
+      background: #2563eb;
+      color: white;
+      box-shadow: 0 6px 14px rgba(37, 99, 235, 0.5);
+    }
+    .btn-primary:hover {
+      background: #1d4ed8;
+      transform: translateY(-1px);
+      box-shadow: 0 10px 20px rgba(37, 99, 235, 0.55);
+    }
+    .btn-secondary {
+      background: #e5e7eb;
+      color: #374151;
+    }
+    .btn-secondary:hover {
+      background: #d1d5db;
+    }
+    .info {
+      margin-top: 14px;
+      font-size: 0.75rem;
+      color: #6b7280;
+      line-height: 1.4;
+    }
+    .info-rtl {
+      direction: rtl;
+      text-align: right;
+      margin-top: 6px;
+    }
+    .muted {
+      color: #9ca3af;
+    }
+    @media (prefers-color-scheme: dark) {
+      body {
+        background: #020617;
+        color: #e5e7eb;
+      }
+      .card {
+        background: #020617;
+        border: 1px solid #111827;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7);
+      }
+      input[type="number"] {
+        background: #020617;
+        color: #e5e7eb;
+        border-color: #1f2937;
+      }
+      input[type="number"]:focus {
+        border-color: #3b82f6;
+        box-shadow: 0 0 0 1px rgba(59, 130, 246, 0.6);
+      }
+      .output-box {
+        background: #020617;
+        border: 1px solid #111827;
+      }
+      .btn-secondary {
+        background: #111827;
+        color: #e5e7eb;
+      }
+      .btn-secondary:hover {
+        background: #1f2937;
+      }
+      .subtitle,
+      .label-he,
+      .info,
+      .info-rtl,
+      .output-label {
+        color: #9ca3af;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <div class="card">
+      <h1>Trane Chiller Cost Calculator</h1>
+      <div class="subtitle">
+        Based on cost–capacity curve regression (Trane / Ohio STS, normalized to ₪ 2025).
+      </div>
+
+      <div class="field-group">
+        <label for="trInput">TR (Ton Refrigeration)</label>
+        <div class="label-he">הכנס הספק בטון קירור (TR)</div>
+        <input
+          id="trInput"
+          type="number"
+          min="1"
+          step="1"
+          placeholder="e.g. 200"
+          inputmode="decimal"
+        />
+      </div>
+
+      <div class="field-group">
+        <div class="output-box">
+          <div class="output-label">
+            Price per TR (₪/TR)<br />
+            <span class="label-he">מחיר מחושב ל־TR (₪/TR)</span>
+          </div>
+          <div id="pptOutput" class="output-value">–</div>
+        </div>
+      </div>
+
+      <div class="field-group">
+        <div class="output-box">
+          <div class="output-label">
+            Total cost (₪)<br />
+            <span class="label-he">עלות כוללת מוערכת (₪)</span>
+          </div>
+          <div id="totalOutput" class="output-value">–</div>
+        </div>
+      </div>
+
+      <div class="btn-row">
+        <button class="btn-secondary" type="button" onclick="resetForm()">
+          Reset
+        </button>
+        <button class="btn-primary" type="button" onclick="calculate()">
+          Calculate
+        </button>
+      </div>
+
+      <div class="info">
+        Model (approx.): <code>price_per_TR ≈ 1227 × TR<sup>-0.155</sup></code><br />
+        <span class="muted">Total cost = price_per_TR × TR</span>
+      </div>
+      <div class="info info-rtl">
+        המקדמים מבוססים על רגרסיה לוג־ליניארית של מחירון Trane (Ohio STS),
+        מומר לערכי ₪ 2025. המחשב מיועד לצורכי אומדן בלבד ואינו מחליף הצעת מחיר בפועל.
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Coefficients from your Excel model
+    const A = 1226.5508490859377;
+    const B = -0.15515627667525872;
+
+    function formatNumber(n) {
+      if (!isFinite(n)) return "–";
+      return n.toLocaleString("he-IL", {
+        maximumFractionDigits: 0
+      });
+    }
+
+    function calculate() {
+      const trInput = document.getElementById("trInput");
+      const pptOutput = document.getElementById("pptOutput");
+      const totalOutput = document.getElementById("totalOutput");
+
+      const tr = parseFloat(trInput.value);
+
+      if (isNaN(tr) || tr <= 0) {
+        pptOutput.textContent = "–";
+        totalOutput.textContent = "–";
+        return;
+      }
+
+      const pricePerTon = A * Math.pow(tr, B);
+      const totalCost = pricePerTon * tr;
+
+      pptOutput.textContent = formatNumber(pricePerTon);
+      totalOutput.textContent = formatNumber(totalCost);
+    }
+
+    function resetForm() {
+      const trInput = document.getElementById("trInput");
+      const pptOutput = document.getElementById("pptOutput");
+      const totalOutput = document.getElementById("totalOutput");
+
+      trInput.value = "";
+      pptOutput.textContent = "–";
+      totalOutput.textContent = "–";
+      trInput.focus();
+    }
+
+    // Allow Enter key to calculate
+    document.addEventListener("DOMContentLoaded", function () {
+      const trInput = document.getElementById("trInput");
+      trInput.addEventListener("keydown", function (e) {
+        if (e.key === "Enter") {
+          e.preventDefault();
+          calculate();
+        }
+      });
+    });
+  </script>
+</body>
+</html>
