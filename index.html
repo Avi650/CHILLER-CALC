@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Trane Chiller Cost Calculator</title>
+  <title>A. ZGHOUL – Trane Chiller Cost Calculator</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
     :root {
@@ -20,26 +20,130 @@
     }
     .wrapper {
       width: 100%;
-      max-width: 460px;
+      max-width: 520px;
       padding: 16px;
       box-sizing: border-box;
     }
     .card {
       background: #ffffff;
-      border-radius: 16px;
-      padding: 20px 18px 18px;
-      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.12);
+      border-radius: 18px;
+      padding: 16px 16px 18px;
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.18);
+      border: 1px solid #e5e7eb;
     }
+
+    /* --- A. ZGHOUL header branding --- */
+    .az-header {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.4fr);
+      gap: 14px;
+      align-items: flex-start;
+      margin-bottom: 14px;
+    }
+    @media (max-width: 560px) {
+      .az-header {
+        grid-template-columns: 1fr;
+      }
+    }
+    .az-logo-block {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      align-items: flex-start;
+    }
+    .az-logo-box {
+      width: 70px;
+      height: 70px;
+      border: 2px solid #000000;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.2rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+    }
+    .az-company-en-main {
+      font-weight: 700;
+      font-size: 0.9rem;
+      margin-top: 4px;
+    }
+    .az-company-en-sub {
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+    }
+    .az-mail {
+      font-size: 0.8rem;
+      color: #1d4ed8;
+      text-decoration: none;
+      margin-top: 6px;
+      word-break: break-all;
+    }
+    .az-mail:hover {
+      text-decoration: underline;
+    }
+
+    .az-right {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      align-items: stretch;
+    }
+    .az-name-he {
+      direction: rtl;
+      text-align: right;
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+    .az-top-strip {
+      margin-top: 4px;
+      height: 9px;
+      background: linear-gradient(to right, #9ca3af 0, #9ca3af 40%, #111827 40%, #111827 100%);
+    }
+    .az-offices {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      margin-top: 6px;
+      gap: 8px;
+    }
+    @media (max-width: 560px) {
+      .az-offices {
+        grid-template-columns: 1fr;
+      }
+    }
+    .az-office {
+      font-size: 0.75rem;
+      line-height: 1.4;
+    }
+    .az-office-title-en {
+      font-weight: 600;
+      font-size: 0.78rem;
+    }
+    .az-office-body-en {
+      font-size: 0.75rem;
+    }
+    .az-office-he {
+      direction: rtl;
+      text-align: right;
+      font-size: 0.75rem;
+    }
+    .divider-soft {
+      margin: 10px 0 6px;
+      border-top: 1px solid #e5e7eb;
+    }
+
     h1 {
-      font-size: 1.3rem;
-      margin: 0 0 4px;
+      font-size: 1.2rem;
+      margin: 0 0 2px;
       text-align: left;
+      font-weight: 600;
     }
     .subtitle {
       font-size: 0.82rem;
       color: #6b7280;
       margin-bottom: 14px;
     }
+
     label {
       font-size: 0.85rem;
       font-weight: 500;
@@ -69,8 +173,8 @@
       margin: 0;
     }
     input[type="number"]:focus {
-      border-color: #2563eb;
-      box-shadow: 0 0 0 1px rgba(37, 99, 235, 0.3);
+      border-color: #111827;
+      box-shadow: 0 0 0 1px rgba(17, 24, 39, 0.28);
     }
     .field-group {
       margin-bottom: 14px;
@@ -112,14 +216,14 @@
       transition: background 0.15s, transform 0.05s, box-shadow 0.15s;
     }
     .btn-primary {
-      background: #2563eb;
+      background: #111827;
       color: white;
-      box-shadow: 0 6px 14px rgba(37, 99, 235, 0.5);
+      box-shadow: 0 6px 14px rgba(15, 23, 42, 0.5);
     }
     .btn-primary:hover {
-      background: #1d4ed8;
+      background: #020617;
       transform: translateY(-1px);
-      box-shadow: 0 10px 20px rgba(37, 99, 235, 0.55);
+      box-shadow: 0 10px 20px rgba(15, 23, 42, 0.55);
     }
     .btn-secondary {
       background: #e5e7eb;
@@ -142,6 +246,17 @@
     .muted {
       color: #9ca3af;
     }
+    .footer-brand {
+      margin-top: 10px;
+      font-size: 0.7rem;
+      color: #9ca3af;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
     @media (prefers-color-scheme: dark) {
       body {
         background: #020617;
@@ -149,8 +264,8 @@
       }
       .card {
         background: #020617;
-        border: 1px solid #111827;
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7);
+        border-color: #111827;
+        box-shadow: 0 24px 50px rgba(0, 0, 0, 0.9);
       }
       input[type="number"] {
         background: #020617;
@@ -158,8 +273,8 @@
         border-color: #1f2937;
       }
       input[type="number"]:focus {
-        border-color: #3b82f6;
-        box-shadow: 0 0 0 1px rgba(59, 130, 246, 0.6);
+        border-color: #e5e7eb;
+        box-shadow: 0 0 0 1px rgba(229, 231, 235, 0.4);
       }
       .output-box {
         background: #020617;
@@ -176,7 +291,8 @@
       .label-he,
       .info,
       .info-rtl,
-      .output-label {
+      .output-label,
+      .footer-brand {
         color: #9ca3af;
       }
     }
@@ -185,9 +301,39 @@
 <body>
   <div class="wrapper">
     <div class="card">
+
+      <!-- A. ZGHOUL letterhead-style header -->
+      <header class="az-header">
+        <div class="az-logo-block">
+          <!-- Replace this box with <img src="az-logo.png" /> if you upload a real logo file -->
+          <div class="az-logo-box">AZ</div>
+          <div class="az-company-en-main">A. ZGHOUL Ltd</div>
+          <div class="az-company-en-sub">APPRAISERS | LOSS ADJUSTERS</div>
+          <a class="az-mail" href="mailto:info@azghoul.co.il">info@azghoul.co.il</a>
+        </div>
+        <div class="az-right">
+          <div class="az-name-he">א. זגול סיקור (2001) בע"מ</div>
+          <div class="az-top-strip"></div>
+          <div class="az-offices">
+            <div class="az-office">
+              <div class="az-office-title-en">HAIFA</div>
+              <div class="az-office-body-en">71 Horev St. 3434407</div>
+              <div class="az-office-body-en">TEL. +972-4-853-2171</div>
+            </div>
+            <div class="az-office">
+              <div class="az-office-title-en">TEL AVIV</div>
+              <div class="az-office-body-en">54 Zahal St.</div>
+              <div class="az-office-body-en">TEL. +972-3-544-1784</div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <div class="divider-soft"></div>
+
       <h1>Trane Chiller Cost Calculator</h1>
       <div class="subtitle">
-        Based on cost–capacity curve regression (Trane / Ohio STS, normalized to ₪ 2025).
+        Cost–capacity model derived from Trane (Ohio STS) price list data (adjusted to 2025 level, USD basis).
       </div>
 
       <div class="field-group">
@@ -206,8 +352,8 @@
       <div class="field-group">
         <div class="output-box">
           <div class="output-label">
-            Price per TR ($/TR)<br />
-            <span class="label-he">מחיר מחושב ל־TR ($/TR)</span>
+            Price per TR (USD / TR)<br />
+            <span class="label-he">מחיר מחושב ל־TR (USD / TR)</span>
           </div>
           <div id="pptOutput" class="output-value">–</div>
         </div>
@@ -216,8 +362,8 @@
       <div class="field-group">
         <div class="output-box">
           <div class="output-label">
-            Total cost ($)<br />
-            <span class="label-he">עלות כוללת מוערכת ($)</span>
+            Total cost (USD)<br />
+            <span class="label-he">עלות כוללת מוערכת (USD)</span>
           </div>
           <div id="totalOutput" class="output-value">–</div>
         </div>
@@ -233,24 +379,30 @@
       </div>
 
       <div class="info">
-        Model (approx.): <code>price_per_TR ≈ 1227 × TR<sup>-0.155</sup></code><br />
+        Model (log–log regression): <code>price_per_TR ≈ 1226.55 × TR<sup>-0.155</sup></code><br />
         <span class="muted">Total cost = price_per_TR × TR</span>
       </div>
       <div class="info info-rtl">
-        המקדמים מבוססים על רגרסיה לוג־ליניארית של מחירון Trane (Ohio STS),
-        מומר לערכי $ 2025. המחשב מיועד לצורכי אומדן בלבד ואינו מחליף הצעת מחיר בפועל.
+        המודל מבוסס על מחירון Trane (Ohio STS) בצמוד לעדכון מדד ל־2025.
+        מיועד לצורכי אומדן בלבד ואינו מחליף הצעת מחיר מחייבת, לרבות הובלה, התקנה ומיסים.
       </div>
+
+      <div class="footer-brand">
+        <span>© A. ZGHOUL Ltd – Appraisers &amp; Loss Adjusters</span>
+        <span class="muted">Internal tool • Chiller cost-of-capacity estimator</span>
+      </div>
+
     </div>
   </div>
 
   <script>
-    // Coefficients from your Excel model
+    // Coefficients from your Excel model (USD basis)
     const A = 1226.5508490859377;
     const B = -0.15515627667525872;
 
     function formatNumber(n) {
       if (!isFinite(n)) return "–";
-      return n.toLocaleString("he-IL", {
+      return n.toLocaleString("en-US", {
         maximumFractionDigits: 0
       });
     }
